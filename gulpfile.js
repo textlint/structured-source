@@ -31,7 +31,8 @@ var gulp = require('gulp'),
     git = require('gulp-git'),
     bump = require('gulp-bump'),
     filter = require('gulp-filter'),
-    tagVersion = require('gulp-tag-version');
+    tagVersion = require('gulp-tag-version'),
+    sourcemaps = require('gulp-sourcemaps');
 
 var TEST = [ 'test/*.js' ];
 var POWERED = [ 'powered-test/*.js' ];
@@ -45,8 +46,10 @@ gulp.task('build', function () {
 
 gulp.task('powered-test', function () {
     return gulp.src(TEST)
+        .pipe(sourcemaps.init())
         .pipe(to5())
         .pipe(espower())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./powered-test/'));
 });
 
@@ -91,9 +94,9 @@ function inc(importance) {
         .pipe(tag_version());
 }
 
-gulp.task('patch', function () { return inc('patch'); })
-gulp.task('minor', function () { return inc('minor'); })
-gulp.task('major', function () { return inc('major'); })
+gulp.task('patch', [ 'build' ], function () { return inc('patch'); })
+gulp.task('minor', [ 'build' ], function () { return inc('minor'); })
+gulp.task('major', [ 'build' ], function () { return inc('major'); })
 
 gulp.task('travis', [ 'test' ]);
 gulp.task('default', [ 'travis' ]);

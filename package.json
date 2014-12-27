@@ -31,6 +31,7 @@
     "gulp-filter": "^2.0.0",
     "gulp-git": "^0.5.5",
     "gulp-mocha": "^2.0.0",
+    "gulp-sourcemaps": "^1.2.8",
     "gulp-tag-version": "^1.2.1",
     "power-assert": "^0.10.0"
   },
