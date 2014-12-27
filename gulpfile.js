@@ -40,7 +40,9 @@ var SOURCE = [ 'src/**/*.js' ];
 
 gulp.task('build', function () {
     return gulp.src(SOURCE)
+        .pipe(sourcemaps.init())
         .pipe(to5())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('lib'));
 });
 
