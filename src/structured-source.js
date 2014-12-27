@@ -22,40 +22,7 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-function upperBound(array, func) {
-    let len = array.length;
-    let i = 0;
-
-    while (len) {
-        let diff = len >>> 1;
-        let current = i + diff;
-        if (func(array[current])) {
-            len = diff;
-        } else {
-            i = current + 1;
-            len -= diff + 1;
-        }
-    }
-    return i;
-}
-
-function lowerBound(array, func) {
-    let len = array.length;
-    let i = 0;
-
-    while (len) {
-        let diff = len >>> 1;
-        let current = i + diff;
-        if (func(array[current])) {
-            i = current + 1;
-            len -= diff + 1;
-        } else {
-            len = diff;
-        }
-    }
-    return i;
-}
+import { upperBound } from 'boundary';
 
 export class Position {
     constructor(line, column) {
@@ -142,9 +109,7 @@ export default class StructuredSource {
      * @return {Position} position.
      */
     indexToPosition(index) {
-        let startLine = upperBound(this.indice, point => {
-            return index < point;
-        });
+        let startLine = upperBound(this.indice, index);
         return new Position(startLine, index - this.indice[startLine - 1]);
     }
 };
