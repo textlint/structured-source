@@ -57,6 +57,20 @@ function lowerBound(array, func) {
     return i;
 }
 
+export class Position {
+    constructor(line, column) {
+        this.line = line;
+        this.column = column;
+    }
+}
+
+export class SourceLocation {
+    constructor(start, end) {
+        this.start = start;
+        this.end = end;
+    }
+}
+
 /**
  * StructuredSource
  * @class
@@ -64,7 +78,7 @@ function lowerBound(array, func) {
 export default class StructuredSource {
     /**
      * @constructs StructuredSource
-     * @param {string} source code.
+     * @param {string} source - source code text.
      */
     constructor(source) {
         this.indice = [ 0 ];
@@ -97,28 +111,41 @@ export default class StructuredSource {
     }
 
     /**
-     * @param {{ line: number, column: number }} location indicator.
-     * @return {number} range.
+     * @param {SourceLocation} loc - location indicator.
+     * @return {[ number, number ]} range.
      */
-    locToRange(loc) {
-        // Line number starts with 1.
-        // Column number starts with 0.
-        let start = this.indice[loc.line - 1];
-        return start + loc.column;
+    locationToRange(loc) {
+        return [ this.positionToIndex(loc.start), this.positionToIndex(loc.end) ];
     }
 
     /**
-     * @param {number} index to the source code.
-     * @return {{ line: number, column: number }} location indicator.
+     * @param {[ number, number ]} range - pair of indice.
+     * @return {SourceLocation} location.
      */
-    indexToLoc(index) {
+    rangeToLocation(range) {
+        return new SourceLocation(this.indexToPosition(range[0]), this.indexToPosition(range[1]));
+    }
+
+    /**
+     * @param {Position} pos - position indicator.
+     * @return {number} index.
+     */
+    positionToIndex(pos) {
+        // Line number starts with 1.
+        // Column number starts with 0.
+        let start = this.indice[pos.line - 1];
+        return start + pos.column;
+    }
+
+    /**
+     * @param {number} index - index to the source code.
+     * @return {Position} position.
+     */
+    indexToPosition(index) {
         let startLine = upperBound(this.indice, point => {
             return index < point;
         });
-        return {
-            line: startLine,
-            column: index - this.indice[startLine - 1]
-        };
+        return new Position(startLine, index - this.indice[startLine - 1]);
     }
 };
 
