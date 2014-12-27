@@ -1,6 +1,6 @@
 {
   "name": "structured-source",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Provides StructuredSource and functionality for converting range and loc vice versa.",
   "author": "Yusuke SUZUKI",
   "homepage": "https://github.com/Constellation/structured-source",
