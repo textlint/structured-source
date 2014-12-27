@@ -22,7 +22,7 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import StructuredSource from '../'
+import * as StructuredSource from '../'
 import * as assert from 'power-assert'
 
 describe('StructuredSource', () => {

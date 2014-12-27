@@ -24,6 +24,6 @@
 
 import StructuredSource from './structured-source.js'
 
-export default StructuredSource;
+module.exports = StructuredSource;
 
 /* vim: set sw=4 ts=4 et tw=80 : */
