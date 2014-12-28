@@ -39,6 +39,11 @@ assert.deepEqual(src.locationToRange({
 }), [0, 2]);
 ```
 
+## Note
+
+- Line number starts with **1**.
+- Column number starts with **0**.
+
 ### License
 
 Copyright (C) 2012-2014 [Yusuke Suzuki](http://github.com/Constellation)
