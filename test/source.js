@@ -22,8 +22,8 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import * as StructuredSource from '../'
-import * as assert from 'power-assert'
+import StructuredSource from '../'
+import assert from 'power-assert'
 
 describe('StructuredSource', () => {
     it('constructor', () => {

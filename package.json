@@ -23,7 +23,8 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "boundary": "^1.0.1"
+    "boundary": "^1.0.1",
+    "core-js": "^0.4.1"
   },
   "devDependencies": {
     "gulp": "^3.8.10",
