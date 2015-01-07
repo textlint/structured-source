@@ -112,6 +112,6 @@ export default class StructuredSource {
         let startLine = upperBound(this.indice, index);
         return new Position(startLine, index - this.indice[startLine - 1]);
     }
-};
+}
 
 /* vim: set sw=4 ts=4 et tw=80 : */

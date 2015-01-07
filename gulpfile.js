@@ -42,7 +42,7 @@ var SOURCE = [ 'src/**/*.js' ];
 
 var build = lazypipe()
     .pipe(sourcemaps.init)
-    .pipe(to5, { optional: ["coreAliasing"] })
+    .pipe(to5)
     .pipe(sourcemaps.write)
     .pipe(gulp.dest, 'lib');
 
@@ -57,7 +57,7 @@ gulp.task('build', function () {
 gulp.task('powered-test', function () {
     return gulp.src(TEST)
         .pipe(sourcemaps.init())
-        .pipe(to5({ optional: ["coreAliasing"] }))
+        .pipe(to5())
         .pipe(espower())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./powered-test/'));
