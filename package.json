@@ -49,10 +49,5 @@
   "bugs": {
     "url": "https://github.com/Constellation/structured-source/issues"
   },
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "http://github.com/Constellation/structured-source/raw/master/LICENSE.BSD"
-    }
-  ]
+  "license": "BSD-2-Clause"
 }
