@@ -26,8 +26,8 @@
       "web": "http://github.com/Constellation"
     }
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/structured-source.js",
+  "types": "lib/structured-source.d.ts",
   "files": [
     "lib"
   ],
@@ -38,7 +38,7 @@
     "watch": "tsc -p . --watch"
   },
   "dependencies": {
-    "boundary": "^1.0.1"
+    "boundary": "^2.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",

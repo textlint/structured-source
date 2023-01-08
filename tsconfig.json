@@ -19,8 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowJs": true
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src/**/*"
