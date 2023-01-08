@@ -23,7 +23,7 @@
 */
 
 import { StructuredSource } from '../src/structured-source'
-import assert from 'assert'
+import assert from 'assert/strict'
 
 describe('StructuredSource', () => {
     it('constructor', () => {
