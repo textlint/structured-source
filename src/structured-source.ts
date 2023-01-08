@@ -24,33 +24,31 @@
 
 import { upperBound } from 'boundary';
 
-export class Position {
-    constructor(line, column) {
-        this.line = line;
-        this.column = column;
-    }
+export type SourceRange = readonly [number, number];
+export type SourcePosition = {
+    readonly line: number,
+    readonly column: number,
 }
 
-export class SourceLocation {
-    constructor(start, end) {
-        this.start = start;
-        this.end = end;
-    }
+export type SourceLocation = {
+    readonly end: SourcePosition,
+    readonly start: SourcePosition,
 }
 
 /**
  * StructuredSource
- * @class
  */
-export default class StructuredSource {
+export class StructuredSource {
+    private readonly indice: number[];
+
     /**
      * @constructs StructuredSource
      * @param {string} source - source code text.
      */
-    constructor(source) {
-        this.indice = [ 0 ];
+    constructor(source: string) {
+        this.indice = [0];
         let regexp = /[\r\n\u2028\u2029]/g;
-        let length = source.length;
+        const length = source.length;
         regexp.lastIndex = 0;
         while (true) {
             let result = regexp.exec(source);
@@ -59,7 +57,7 @@ export default class StructuredSource {
             }
             let index = result.index;
             if (source.charCodeAt(index) === 0x0D  /* '\r' */ &&
-                    source.charCodeAt(index + 1) === 0x0A  /* '\n' */) {
+                source.charCodeAt(index + 1) === 0x0A  /* '\n' */) {
                 index += 1;
             }
             let nextIndex = index + 1;
@@ -73,7 +71,7 @@ export default class StructuredSource {
         }
     }
 
-    get line() {
+    get line(): number {
         return this.indice.length;
     }
 
@@ -81,23 +79,26 @@ export default class StructuredSource {
      * @param {SourceLocation} loc - location indicator.
      * @return {[ number, number ]} range.
      */
-    locationToRange(loc) {
-        return [ this.positionToIndex(loc.start), this.positionToIndex(loc.end) ];
+    locationToRange(loc: SourceLocation): SourceRange {
+        return [this.positionToIndex(loc.start), this.positionToIndex(loc.end)];
     }
 
     /**
      * @param {[ number, number ]} range - pair of indice.
      * @return {SourceLocation} location.
      */
-    rangeToLocation(range) {
-        return new SourceLocation(this.indexToPosition(range[0]), this.indexToPosition(range[1]));
+    rangeToLocation(range: SourceRange): SourceLocation {
+        return {
+            start: this.indexToPosition(range[0]),
+            end: this.indexToPosition(range[1])
+        };
     }
 
     /**
-     * @param {Position} pos - position indicator.
+     * @param {SourcePosition} pos - position indicator.
      * @return {number} index.
      */
-    positionToIndex(pos) {
+    positionToIndex(pos: SourcePosition): number {
         // Line number starts with 1.
         // Column number starts with 0.
         let start = this.indice[pos.line - 1];
@@ -106,11 +107,14 @@ export default class StructuredSource {
 
     /**
      * @param {number} index - index to the source code.
-     * @return {Position} position.
+     * @return {SourcePosition} position.
      */
-    indexToPosition(index) {
-        let startLine = upperBound(this.indice, index);
-        return new Position(startLine, index - this.indice[startLine - 1]);
+    indexToPosition(index: number): SourcePosition {
+        const startLine = upperBound(this.indice, index);
+        return {
+            line: startLine,
+            column: index - this.indice[startLine - 1]
+        };
     }
 }
 

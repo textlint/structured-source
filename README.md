@@ -14,9 +14,9 @@ npm install structured-source
 ## Usage
 
 ```js
-const  StructuredSource = require('structured-source');
+import { StructuredSource } from "structured-source"; 
 
-let src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
+const src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
 
 // positionToIndex({ line: number, column: number) -> number
 assert(src.positionToIndex({ line: 1, column: 2 }) === 2);

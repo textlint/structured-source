@@ -22,51 +22,57 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import StructuredSource from '../src/index.js'
+import { StructuredSource } from '../src/structured-source'
 import assert from 'assert'
 
 describe('StructuredSource', () => {
     it('constructor', () => {
         {
-            let src = new StructuredSource('');
-            assert.deepEqual(src.indice, [ 0 ]);
-            assert(src.line === 1);
+            const src = new StructuredSource('');
+            // @ts-expect-error: for testing
+            assert.deepEqual(src.indice, [0]);
+            assert.strictEqual(src.line , 1);
         }
 
         {
-            let src = new StructuredSource('\n');
-            assert.deepEqual(src.indice, [ 0, 1 ]);
-            assert(src.line === 2);
+            const src = new StructuredSource('\n');
+            // @ts-expect-error: for testing
+            assert.deepEqual(src.indice, [0, 1]);
+            assert.strictEqual(src.line , 2);
         }
 
         {
-            let src = new StructuredSource('\r\n');
-            assert.deepEqual(src.indice, [ 0, 2 ]);
-            assert(src.line === 2);
+            const src = new StructuredSource('\r\n');
+            // @ts-expect-error: for testing
+            assert.deepEqual(src.indice, [0, 2]);
+            assert.strictEqual(src.line , 2);
         }
 
         {
-            let src = new StructuredSource('\n\r');
-            assert.deepEqual(src.indice, [ 0, 1, 2 ]);
-            assert(src.line === 3);
+            const src = new StructuredSource('\n\r');
+            // @ts-expect-error: for testing
+            assert.deepEqual(src.indice, [0, 1, 2]);
+            assert.strictEqual(src.line , 3);
         }
 
         {
-            let src = new StructuredSource('aaa\naaaa\raaaaa');
-            assert.deepEqual(src.indice, [ 0, 4, 9 ]);
-            assert(src.line === 3);
+            const src = new StructuredSource('aaa\naaaa\raaaaa');
+            // @ts-expect-error: for testing
+            assert.deepEqual(src.indice, [0, 4, 9]);
+            assert.strictEqual(src.line , 3);
         }
 
         {
-            let src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
-            assert.deepEqual(src.indice, [ 0, 4, 9, 15 ]);
-            assert(src.line === 4);
+            const src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
+            // @ts-expect-error: for testing
+            assert.deepEqual(src.indice, [0, 4, 9, 15]);
+            assert.strictEqual(src.line , 4);
         }
     });
 
     it('positionToIndex', () => {
         {
-            let src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
+            const src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
             assert(src.positionToIndex({ line: 1, column: 2 }) === 2);
             assert(src.positionToIndex({ line: 2, column: 2 }) === 6);
             assert(src.positionToIndex({ line: 2, column: 5 }) === 9);  // out of source column is calculated.
@@ -79,7 +85,7 @@ describe('StructuredSource', () => {
 
     it('indexToPosition', () => {
         {
-            let src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
+            const src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
             assert.deepEqual(src.indexToPosition(2), { line: 1, column: 2 });
             assert.deepEqual(src.indexToPosition(6), { line: 2, column: 2 });
             assert.deepEqual(src.indexToPosition(9), { line: 3, column: 0 });
@@ -90,7 +96,7 @@ describe('StructuredSource', () => {
         }
 
         {
-            let src = new StructuredSource('');
+            const src = new StructuredSource('');
             assert.deepEqual(src.indexToPosition(2), { line: 1, column: 2 });
             assert.deepEqual(src.indexToPosition(6), { line: 1, column: 6 });
             assert.deepEqual(src.indexToPosition(0), { line: 1, column: 0 });
@@ -99,7 +105,7 @@ describe('StructuredSource', () => {
 
     it('rangeToLocation', () => {
         {
-            let src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
+            const src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
             assert.deepEqual(src.rangeToLocation([0, 2]), {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 2 }
@@ -110,7 +116,7 @@ describe('StructuredSource', () => {
             });
         }
         {
-            let src = new StructuredSource('');
+            const src = new StructuredSource('');
             assert.deepEqual(src.rangeToLocation([0, 2]), {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 2 }
@@ -120,7 +126,7 @@ describe('StructuredSource', () => {
 
     it('locationToRange', () => {
         {
-            let src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
+            const src = new StructuredSource('aaa\u2028aaaa\u2029aaaaa\n');
             assert.deepEqual(src.locationToRange({
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 2 }
@@ -131,7 +137,7 @@ describe('StructuredSource', () => {
             }), [0, 45]);
         }
         {
-            let src = new StructuredSource('');
+            const src = new StructuredSource('');
             assert.deepEqual(src.locationToRange({
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 2 }

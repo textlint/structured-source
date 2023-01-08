@@ -26,8 +26,8 @@
       "web": "http://github.com/Constellation"
     }
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/structured-source.js",
+  "types": "lib/structured-source.d.ts",
   "files": [
     "lib"
   ],
