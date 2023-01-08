@@ -27,7 +27,7 @@
     }
   ],
   "main": "lib/index.js",
-  "types": "lib/structured-source.d.ts",
+  "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
