@@ -1,15 +1,8 @@
-StructuredSource
-==============
-
+# StructuredSource [![npm version](https://badge.fury.io/js/structured-source.svg)](http://badge.fury.io/js/structured-source) [![Actions Status: test](https://github.com/textlint/structured-source/workflows/test/badge.svg)](https://github.com/textlint/structured-source/actions?query=workflow%3A"test")
 
 ## About
 
 Provides StructuredSource and functionality for converting range and loc vice versa.
-
-[![npm version](https://badge.fury.io/js/structured-source.svg)](http://badge.fury.io/js/structured-source)
-[![Build Status](https://secure.travis-ci.org/Constellation/structured-source.svg)](http://travis-ci.org/Constellation/structured-source)
-[![Dependency Status](https://david-dm.org/Constellation/structured-source.svg)](https://david-dm.org/Constellation/structured-source)
-[![devDependency Status](https://david-dm.org/Constellation/structured-source/dev-status.svg)](https://david-dm.org/Constellation/structured-source#info=devDependencies)
 
 ## Installation
 
