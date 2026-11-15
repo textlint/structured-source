@@ -1,11 +1,14 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
+        "rootDir": "./",
         "declaration": false,
-        "noEmit": true
+        "declarationMap": false,
+        "sourceMap": false,
+        "noEmit": true,
+        "types": ["node"]
     },
     "include": [
-        "../src/**/*",
         "./**/*"
     ]
 }

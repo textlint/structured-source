@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "node20",
+    "moduleResolution": "node16",
     "esModuleInterop": true,
     "newLine": "LF",
+    "rootDir": "./src/",
     "outDir": "./lib/",
     "target": "ES2018",
     "sourceMap": true,
