@@ -39,7 +39,10 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
-  "packageManager": "npm@8.19.2"
+  "packageManager": "npm@12.2.2",
+  "dependencies": {
+    "boundary": "^2.0.0"
+  }
 }
