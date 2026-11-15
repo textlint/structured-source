@@ -22,8 +22,9 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import { StructuredSource } from '../src/structured-source'
-import assert from 'assert'
+import { describe, it } from 'node:test';
+import assert from 'node:assert';
+import { StructuredSource } from '../lib/structured-source.js';
 
 describe('StructuredSource', () => {
     it('constructor', () => {

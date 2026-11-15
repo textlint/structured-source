@@ -22,8 +22,6 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import { upperBound } from 'boundary';
-
 export type SourceRange = readonly [number, number];
 export type SourcePosition = {
     readonly line: number,
@@ -33,6 +31,26 @@ export type SourcePosition = {
 export type SourceLocation = {
     readonly end: SourcePosition,
     readonly start: SourcePosition,
+}
+
+/**
+ * Returns the index of the first element in the sorted `array` that is greater than `value`.
+ * Returns `array.length` if there is no such element.
+ */
+function upperBound(array: readonly number[], value: number): number {
+    let len = array.length;
+    let i = 0;
+    while (len) {
+        const diff = len >>> 1;
+        const cursor = i + diff;
+        if (value < array[cursor]) {
+            len = diff;
+        } else {
+            i = cursor + 1;
+            len -= diff + 1;
+        }
+    }
+    return i;
 }
 
 /**
